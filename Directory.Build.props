@@ -1,0 +1,26 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <Deterministic>true</Deterministic>
+    <Authors>Jack Della</Authors>
+    <Company>MAGIQ Software</Company>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageManagement Include="Jacko1394.PrettyPrinter" Version="2.0.1" />
+    <PackageManagement Include="Jacko1394.JsonExtensions" Version="1.0.0" />
+    <PackageManagement Include="Magiq.Mobile.Hosting" Version="1.0.5" />
+    <PackageManagement Include="Magiq.Mobile.Extensions" Version="2.0.2" />
+    <PackageManagement Include="Xamarin.Forms" Version="4.5.0.356" />
+    <PackageManagement Include="System.Text.Json" Version="4.7.1" />
+    <PackageManagement Include="Microsoft.Extensions.Options" Version="3.1.2" />
+    <PackageManagement Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.2" />
+    <PackageManagement Include="LiteDB" Version="5.0.3" />
+    <PackageManagement Include="Microsoft.NET.Test.Sdk" Version="16.6.0-preview-20200226-03" />
+    <PackageManagement Include="nunit" Version="3.12.0" />
+    <PackageManagement Include="NUnit3TestAdapter" Version="3.16.1" />
+  </ItemGroup>
+</Project>
