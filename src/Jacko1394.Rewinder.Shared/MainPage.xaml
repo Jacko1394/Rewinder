@@ -9,59 +9,83 @@
 			 BackgroundColor="#3A3A3A"
 			 x:Class="Jacko1394.Rewinder.Shared.MainPage">
 
-	<ListView BackgroundColor="#3A3A3A"
-			  ItemsSource="{Binding List}"
-			  SelectionMode="None"
-			  RowHeight="320"
-			  SelectedItem="{Binding Tap, Mode=OneWayToSource}"
-			  VerticalScrollBarVisibility="Never"
-			  x:Name="thyList">
+	<AbsoluteLayout>
 
-		<ListView.ItemTemplate>
-			<DataTemplate>
-				<ViewCell>
-					<StackLayout>
+		<StackLayout AbsoluteLayout.LayoutBounds="0, 0, 1, 0.15"
+					 AbsoluteLayout.LayoutFlags="All"
+					 HorizontalOptions="FillAndExpand"
+					 Padding="12">
 
-						<Label Text="{Binding Display}"
-								TextColor="White"
-								MaxLines="1"
-								LineBreakMode="TailTruncation"
-								VerticalOptions="Center"
-								HorizontalOptions="Start"
-								Margin="8, 2"
-								FontFamily="Helvetica Neue"/>
+			<view:WhiteLabel Text="Add directory:"/>
 
-						<Editor Text="FDFdflkdjfkljdslfjdsjfljdslflsdgllsdjglsd"
-								VerticalOptions="FillAndExpand"
-								FontFamily="Helvetica Neue"
-								IsSpellCheckEnabled="False"
-								TextColor="White"
-								Margin="10"/>
+			<StackLayout Orientation="Horizontal">
+				<Entry FontFamily="Helvetica Neue"
+					   TextColor="White"
+					   HorizontalOptions="FillAndExpand"/>
 
-						<Grid RowSpacing="1"
-							  HorizontalOptions="CenterAndExpand"
-							  VerticalOptions="Center">
+				<Button Text="Add"
+						TextColor="White"
+						FontFamily="Helvetica Neue"
+						BackgroundColor="DeepSkyBlue"
+						HorizontalOptions="Center"/>
+			</StackLayout>
 
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="160"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
+		</StackLayout>
 
-							<Grid.RowDefinitions>
-								<RowDefinition Height="26"/>
-								<RowDefinition Height="26"/>
-								<RowDefinition Height="26"/>
-							</Grid.RowDefinitions>
+		<ListView BackgroundColor="#3A3A3A"
+				  ItemsSource="{Binding List}"
+				  SelectionMode="None"
+				  RowHeight="420"
+				  SelectedItem="{Binding Tap, Mode=OneWayToSource}"
+				  VerticalScrollBarVisibility="Never"
+				  x:Name="thyList"
+				  AbsoluteLayout.LayoutBounds="0, 1, 1, 0.85"
+				  AbsoluteLayout.LayoutFlags="All">
 
-							<view:WhiteLabel Grid.Column="0" Grid.Row="0" Text="Path"/> <view:WhiteLabel Grid.Column="1" Grid.Row="0" Text="123890"/>
-							<view:WhiteLabel Grid.Column="0" Grid.Row="1" Text="Document ID"/> <view:WhiteLabel Grid.Column="1" Grid.Row="1" Text="234789"/>
-							<view:WhiteLabel Grid.Column="0" Grid.Row="2" Text="Document Type"/> <view:WhiteLabel Grid.Column="1" Grid.Row="2" Text="345456"/>
-						</Grid>
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<ViewCell>
+						<StackLayout Spacing="12"
+									 Padding="12">
 
-					</StackLayout>
-				</ViewCell>
-			</DataTemplate>
-		</ListView.ItemTemplate>
+							<view:WhiteLabel Text="{Binding Display}"
+											 TextDecorations="Underline"
+											 MaxLines="1"
+											 LineBreakMode="HeadTruncation"/>
 
-	</ListView>
+							<Editor Text="FDFdflkdjfkljdslfjdsjfljdslflsdgllsdjglsd"
+									VerticalOptions="FillAndExpand"
+									FontFamily="Helvetica Neue"
+									IsSpellCheckEnabled="False"
+									TextColor="White"/>
+
+							<Grid RowSpacing="2"
+								  HorizontalOptions="CenterAndExpand"
+								  VerticalOptions="Center">
+
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="160"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+
+								<Grid.RowDefinitions>
+									<RowDefinition Height="24"/>
+									<RowDefinition Height="24"/>
+									<RowDefinition Height="24"/>
+								</Grid.RowDefinitions>
+
+								<view:WhiteLabel Grid.Column="0" Grid.Row="0" Text="Path"/> <view:WhiteLabel Grid.Column="1" Grid.Row="0" Text="123890"/>
+								<view:WhiteLabel Grid.Column="0" Grid.Row="1" Text="Document ID"/> <view:WhiteLabel Grid.Column="1" Grid.Row="1" Text="234789"/>
+								<view:WhiteLabel Grid.Column="0" Grid.Row="2" Text="Document Type"/> <view:WhiteLabel Grid.Column="1" Grid.Row="2" Text="345456"/>
+							</Grid>
+
+							<BoxView Color="White" HeightRequest="1"/>
+
+						</StackLayout>
+					</ViewCell>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+
+		</ListView>
+	</AbsoluteLayout>
 </ContentPage>

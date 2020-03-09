@@ -2,7 +2,6 @@
 
 using System;
 using AppKit;
-using Jacko1394.Rewinder.Shared;
 using Xamarin.Forms;
 
 namespace Jacko1394.Rewinder.MacOS

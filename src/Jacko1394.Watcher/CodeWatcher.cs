@@ -18,18 +18,17 @@ namespace Jacko1394.Watcher {
 
 		public event EventHandler<string>? OnNewDiff;
 		public event EventHandler<string>? OnNewEntity;
+		public event EventHandler<string>? OnAddDirectory;
 
-		public IEnumerable<string> Directories => IncludeFilters;
-
-		// // // //
+		public IEnumerable<string> WatcherFileTypes => IncludeFilters;
+		public IEnumerable<string> WatcherDirectorires => IncludeFilters;
 
 		private readonly ILogger _logger;
-		// private readonly ILiteQueryable<CodeWatcherEntity> _diffsQueriable;
 		private readonly ILiteCollection<CodeWatcherEntity> _diffs;
-		private readonly Dictionary<string, FileSystemWatcher> Watchers = new Dictionary<string, FileSystemWatcher>();
-
+		// private readonly ILiteQueryable<CodeWatcherEntity> _diffsQueriable;
+		private readonly IDictionary<string, FileSystemWatcher> Watchers = new Dictionary<string, FileSystemWatcher>();
 		private readonly IDiffMatchPatch _differ;
-		private readonly LiteDatabase _db;
+		private readonly ILiteDatabase _db;
 
 		private readonly string[] IncludeFilters;
 		private readonly string[] ExcludeDirectories;
@@ -43,29 +42,16 @@ namespace Jacko1394.Watcher {
 
 			_logger = logger;
 			_differ = differ;
+			_db = db.GetLiteDatabase();
+			_diffs = _db.GetCollection<CodeWatcherEntity>("Diffs");
 
 			var s = settings.Value;
 			IncludeFilters = s.IncludeFiles;
 			ExcludeDirectories = s.ExcludeDirectories;
 
-			_db = db.GetLiteDatabase();
-
-			_diffs = _db.GetCollection<CodeWatcherEntity>("Diffs");
-			// _diffsQueriable = _diffs.Query();
-
 			var test = _diffs.FindAll().ToJson();
-
-			// clean irrelevent
-			//var wrong = _diffsQueriable.Select(x => x.Path).ToEnumerable();
-			//foreach (var path in wrong) {
-			//	foreach (var dir in ExcludeDirectories) {
-			//		if (path?.Contains(dir) == true) {
-			//			_diffs.Delete(path);
-			//		}
-			//	}
-			//}
-
-			//var str = _diffs.FindAll().ToJson();
+			// _diffsQueriable = _diffs.Query();
+			// var str = _diffs.FindAll().ToJson();
 			File.WriteAllText("/Users/jd/Desktop/lite.json", test);
 		}
 
@@ -85,6 +71,7 @@ namespace Jacko1394.Watcher {
 			watcher.Renamed += DiffUpdate; // Renamed
 
 			Watchers[dir] = watcher;
+			OnAddDirectory?.Invoke(this, dir);
 		}
 
 		private void DiffUpdate(object sender, FileSystemEventArgs e) {
@@ -92,13 +79,12 @@ namespace Jacko1394.Watcher {
 			var path = e.FullPath;
 
 			if (!IncludeFilters.Contains(path)) {
+				//foreach (var item in IncludeFilters) {
+				//	watcher.Filters.Add(item);
+				//}
 				_logger.LogError($"IncludeFilters: {path}");
 				return;
 			}
-
-			//foreach (var item in IncludeFilters) {
-			//	watcher.Filters.Add(item);
-			//}
 
 			foreach (var dir in ExcludeDirectories) {
 				if (path.Contains(dir)) {

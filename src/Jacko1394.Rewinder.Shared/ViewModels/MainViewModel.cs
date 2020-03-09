@@ -3,10 +3,10 @@
 // Created by Jack Della on 9/03/2020
 // Copyright © 2020 MAGIQ Software Ltd. All rights reserved.
 
-using MvvmHelpers;
-using Jacko1394.Watcher.Interfaces;
 using System.Windows.Input;
+using MvvmHelpers;
 using MvvmHelpers.Commands;
+using Jacko1394.Watcher.Interfaces;
 
 namespace Jacko1394.Rewinder.Shared.ViewModels {
 
@@ -52,13 +52,22 @@ namespace Jacko1394.Rewinder.Shared.ViewModels {
 
 			_watcher = code;
 
-			foreach (var item in _watcher.Directories) {
-				List.Add(new Item {
-					Display = item
-				});
-			}
+			code.OnAddDirectory += Code_OnAddDirectory;
+
+			code.Add("/Users/jd/GIT/Rewinder");
+
+			//foreach (var item in _watcher.WatcherFileTypes) {
+			//	List.Add(new Item {
+			//		Display = item
+			//	});
+			//}
 
 		}
 
+		private void Code_OnAddDirectory(object sender, string e) {
+			List.Add(new Item {
+				Display = e
+			});
+		}
 	}
 }

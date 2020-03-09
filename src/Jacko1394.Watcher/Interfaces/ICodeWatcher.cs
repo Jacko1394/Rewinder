@@ -9,10 +9,12 @@ namespace Jacko1394.Watcher.Interfaces {
 
     public interface ICodeWatcher {
 
-        IEnumerable<string> Directories { get; }
+        IEnumerable<string> WatcherFileTypes { get; }
+        IEnumerable<string> WatcherDirectorires { get; }
 
         event EventHandler<string>? OnNewDiff; // html
         event EventHandler<string>? OnNewEntity; // file content
+        event EventHandler<string>? OnAddDirectory; // Add(string dir);
 
         void Add(string dir);
 
