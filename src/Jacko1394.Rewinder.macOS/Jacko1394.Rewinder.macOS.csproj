@@ -189,6 +189,9 @@
     <Reference Include="MvvmHelpers">
       <HintPath>..\..\packages\Refractored.MvvmHelpers.1.6.1-beta\lib\netstandard2.0\MvvmHelpers.dll</HintPath>
     </Reference>
+    <Reference Include="Jacko1394.Zsh">
+      <HintPath>..\..\packages\Jacko1394.Zsh.1.0.0\lib\netstandard2.1\Jacko1394.Zsh.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json" />

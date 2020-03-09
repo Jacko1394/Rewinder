@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" />
     <PackageReference Include="Magiq.Mobile.Hosting" />
     <PackageReference Include="Refractored.MvvmHelpers" />
+    <PackageReference Include="Jacko1394.Zsh" />
   </ItemGroup>
 
   <ItemGroup>

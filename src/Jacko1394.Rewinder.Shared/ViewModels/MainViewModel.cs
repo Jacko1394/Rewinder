@@ -7,6 +7,7 @@ using System.Windows.Input;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Jacko1394.Watcher.Interfaces;
+using Jacko1394.Zsh;
 
 namespace Jacko1394.Rewinder.Shared.ViewModels {
 
@@ -38,6 +39,7 @@ namespace Jacko1394.Rewinder.Shared.ViewModels {
 		public ObservableRangeCollection<Item> List { get; } = new ObservableRangeCollection<Item>();
 
 		private readonly ICodeWatcher _watcher;
+		private readonly IZsh _zsh;
 
 		private void Select(Item item) {
 
@@ -48,13 +50,16 @@ namespace Jacko1394.Rewinder.Shared.ViewModels {
 
 		}
 
-		public MainViewModel(ICodeWatcher code) {
+		public MainViewModel(ICodeWatcher code, IZsh zsh) {
 
+			_zsh = zsh;
 			_watcher = code;
 
 			code.OnAddDirectory += Code_OnAddDirectory;
 
-			code.Add("/Users/jd/GIT/Rewinder");
+			// code.Add("/Users/jd/GIT/Rewinder");
+
+			zsh.Dir = "/Users/jd";
 
 			//foreach (var item in _watcher.WatcherFileTypes) {
 			//	List.Add(new Item {

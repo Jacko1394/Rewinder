@@ -7,7 +7,7 @@
 			 mc:Ignorable="d"
 			 Title="Rewinder"
 			 BackgroundColor="#3A3A3A"
-			 x:Class="Jacko1394.Rewinder.Shared.MainPage">
+			 x:Class="Jacko1394.Rewinder.Shared.Views.MainPage">
 
 	<AbsoluteLayout>
 

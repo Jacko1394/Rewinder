@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Microsoft.Extensions.Logging;
+using Jacko1394.Rewinder.Shared.Views;
 
 namespace Jacko1394.Rewinder.Shared {
 

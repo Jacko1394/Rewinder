@@ -1,10 +1,9 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Jacko1394.Rewinder.Shared.ViewModels;
-using Jacko1394.Rewinder.Shared.Views;
 
 [assembly:XamlCompilation(XamlCompilationOptions.Compile)]
-namespace Jacko1394.Rewinder.Shared {
+namespace Jacko1394.Rewinder.Shared.Views {
 
     public partial class MainPage : ContentPage {
 
