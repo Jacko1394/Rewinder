@@ -1,58 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" HeightRequest="50"
-             Title="Rewinder"
-             x:Class="Jacko1394.Rewinder.Shared.MainPage">
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:view="clr-namespace:Jacko1394.Rewinder.Shared.Views"
+			 mc:Ignorable="d"
+			 Title="Rewinder"
+			 BackgroundColor="#3A3A3A"
+			 x:Class="Jacko1394.Rewinder.Shared.MainPage">
 
-	<ListView BackgroundColor="Fuchsia"
-					SelectionMode="Single"
-					ItemsSource="{Binding List}"
-					x:Name="thyList">
+	<ListView BackgroundColor="#3A3A3A"
+			  ItemsSource="{Binding List}"
+			  SelectionMode="None"
+			  RowHeight="320"
+			  SelectedItem="{Binding Tap, Mode=OneWayToSource}"
+			  VerticalScrollBarVisibility="Never"
+			  x:Name="thyList">
 
 		<ListView.ItemTemplate>
 			<DataTemplate>
-
 				<ViewCell>
+					<StackLayout>
 
-					<StackLayout Spacing="0" VerticalOptions="Center" HorizontalOptions="Center">
-					<Grid HorizontalOptions="Center">
+						<Label Text="{Binding Display}"
+								TextColor="White"
+								MaxLines="1"
+								LineBreakMode="TailTruncation"
+								VerticalOptions="Center"
+								HorizontalOptions="Start"
+								Margin="8, 2"
+								FontFamily="Helvetica Neue"/>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="6"/> <!--padding-->
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="40"/>
-						</Grid.ColumnDefinitions>
+						<Editor Text="FDFdflkdjfkljdslfjdsjfljdslflsdgllsdjglsd"
+								VerticalOptions="FillAndExpand"
+								FontFamily="Helvetica Neue"
+								IsSpellCheckEnabled="False"
+								TextColor="White"
+								Margin="10"/>
 
-						<StackLayout Orientation="Horizontal" Grid.Column="1">
-							<Label Text="{Binding Display}"
-								   MaxLines="1"
-								   LineBreakMode="TailTruncation"
-								   VerticalOptions="Center"
-								   HorizontalOptions="FillAndExpand"
-								   FontFamily="Roboto-Regular"/>
-							<Label Text="Due"
-								   BackgroundColor="Red"
-								   TextColor="White" HorizontalOptions="Center"
-								   Padding="3"
-								   LineBreakMode="NoWrap"
-								   VerticalOptions="Center"/>
-						</StackLayout>
+						<Grid RowSpacing="1"
+							  HorizontalOptions="CenterAndExpand"
+							  VerticalOptions="Center">
 
-					</Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="160"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
 
-					<BoxView HeightRequest="0.8"
-							 BackgroundColor="Black"
-							 VerticalOptions="End"/>
-				</StackLayout>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="26"/>
+								<RowDefinition Height="26"/>
+								<RowDefinition Height="26"/>
+							</Grid.RowDefinitions>
 
+							<view:WhiteLabel Grid.Column="0" Grid.Row="0" Text="Path"/> <view:WhiteLabel Grid.Column="1" Grid.Row="0" Text="123890"/>
+							<view:WhiteLabel Grid.Column="0" Grid.Row="1" Text="Document ID"/> <view:WhiteLabel Grid.Column="1" Grid.Row="1" Text="234789"/>
+							<view:WhiteLabel Grid.Column="0" Grid.Row="2" Text="Document Type"/> <view:WhiteLabel Grid.Column="1" Grid.Row="2" Text="345456"/>
+						</Grid>
+
+					</StackLayout>
 				</ViewCell>
-
 			</DataTemplate>
 		</ListView.ItemTemplate>
 
 	</ListView>
-
 </ContentPage>

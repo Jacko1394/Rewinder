@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Jacko1394.Rewinder.Shared.Views;
 using Jacko1394.Rewinder.Shared.ViewModels;
 
 namespace Jacko1394.Rewinder.Shared {
@@ -37,7 +38,10 @@ namespace Jacko1394.Rewinder.Shared {
 					});
 
 					services.AddTransient<MainPage>();
+					services.AddTransient<DirectoryPage>();
+
 					services.AddTransient<MainViewModel>();
+
 					services.AddTransient<IDbProvider, DbProvider>();
 					services.AddTransient<ICodeWatcher, CodeWatcher>();
 					services.AddTransient<IDiffMatchPatch, DiffMatchPatch>();

@@ -16,13 +16,13 @@ namespace Jacko1394.Rewinder.MacOS
 		{
 		}
 
-        partial void BackButtonPressed(Foundation.NSObject sender)
-        {
-            ((NavigationPage)App.Current.MainPage).PopAsync();
+        partial void BackButtonPressed(Foundation.NSObject sender) {
+			if (Application.Current.MainPage is NavigationPage navigation) {
+                Device.BeginInvokeOnMainThread(async () => await navigation.PopAsync());
+            }
         }
 
-        public override void ViewDidLoad()
-        {
+        public override void ViewDidLoad() {
             base.ViewDidLoad();
 
             if (_contentView?.View is null) {

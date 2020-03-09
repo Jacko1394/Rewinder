@@ -4,36 +4,59 @@
 // Copyright © 2020 MAGIQ Software Ltd. All rights reserved.
 
 using MvvmHelpers;
+using Jacko1394.Watcher.Interfaces;
+using System.Windows.Input;
+using MvvmHelpers.Commands;
 
 namespace Jacko1394.Rewinder.Shared.ViewModels {
 
 	public class MainViewModel : BaseViewModel {
 
-		public class Item {
+		public class Item : ObservableObject {
+
 			public string? Display { get; set; }
+
+			private bool show;
+			public bool Show {
+				set => SetProperty(ref show, value);
+				get => show;
+			}
+
+			public Item() {
+				Click = new Command(() => {
+					Show = !Show;
+				});
+			}
+
+			public ICommand Click { get; set; }
+		}
+
+		public Item Tap {
+			set => Select(value);
 		}
 
 		public ObservableRangeCollection<Item> List { get; } = new ObservableRangeCollection<Item>();
 
-		public MainViewModel() {
+		private readonly ICodeWatcher _watcher;
 
-			List.AddRange(new Item[] {
-				new Item {
-					Display = "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consect"
-				},
-				new Item {
-					Display = "oing to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem"
-				},
-				new Item {
-					Display = "at predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined "
-				},
-				new Item {
-					Display = "e English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ips"
-				},
-				new Item {
-					Display = "simply dummy text of the pri"
-				}
-			});
+		private void Select(Item item) {
+
+			if (item is null) {
+				return;
+			}
+
+
+		}
+
+		public MainViewModel(ICodeWatcher code) {
+
+			_watcher = code;
+
+			foreach (var item in _watcher.Directories) {
+				List.Add(new Item {
+					Display = item
+				});
+			}
 
 		}
 

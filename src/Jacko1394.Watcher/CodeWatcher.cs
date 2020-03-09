@@ -19,6 +19,10 @@ namespace Jacko1394.Watcher {
 		public event EventHandler<string>? OnNewDiff;
 		public event EventHandler<string>? OnNewEntity;
 
+		public IEnumerable<string> Directories => IncludeFilters;
+
+		// // // //
+
 		private readonly ILogger _logger;
 		// private readonly ILiteQueryable<CodeWatcherEntity> _diffsQueriable;
 		private readonly ILiteCollection<CodeWatcherEntity> _diffs;
