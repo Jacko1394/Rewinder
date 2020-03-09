@@ -7,9 +7,52 @@
              Title="Rewinder"
              x:Class="Jacko1394.Rewinder.Shared.MainPage">
 
-    <StackLayout Margin="20" VerticalOptions="Center">
-        <Label Text="Jack Della!" VerticalOptions="Center" HorizontalOptions="Center" />
-        <Button Clicked="GotoCalculatorClicked" Text="Click Here" VerticalOptions="Center" BackgroundColor="LightSkyBlue" />
-    </StackLayout>
+	<ListView BackgroundColor="Fuchsia"
+					SelectionMode="Single"
+					ItemsSource="{Binding List}"
+					x:Name="thyList">
+
+		<ListView.ItemTemplate>
+			<DataTemplate>
+
+				<ViewCell>
+
+					<StackLayout Spacing="0" VerticalOptions="Center" HorizontalOptions="Center">
+					<Grid HorizontalOptions="Center">
+
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="6"/> <!--padding-->
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="40"/>
+						</Grid.ColumnDefinitions>
+
+						<StackLayout Orientation="Horizontal" Grid.Column="1">
+							<Label Text="{Binding Display}"
+								   MaxLines="1"
+								   LineBreakMode="TailTruncation"
+								   VerticalOptions="Center"
+								   HorizontalOptions="FillAndExpand"
+								   FontFamily="Roboto-Regular"/>
+							<Label Text="Due"
+								   BackgroundColor="Red"
+								   TextColor="White" HorizontalOptions="Center"
+								   Padding="3"
+								   LineBreakMode="NoWrap"
+								   VerticalOptions="Center"/>
+						</StackLayout>
+
+					</Grid>
+
+					<BoxView HeightRequest="0.8"
+							 BackgroundColor="Black"
+							 VerticalOptions="End"/>
+				</StackLayout>
+
+				</ViewCell>
+
+			</DataTemplate>
+		</ListView.ItemTemplate>
+
+	</ListView>
 
 </ContentPage>

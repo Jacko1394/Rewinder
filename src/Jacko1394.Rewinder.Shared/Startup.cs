@@ -5,12 +5,14 @@
 
 using Magiq.Mobile.Hosting;
 using Jacko1394.Watcher;
+using Jacko1394.Watcher.Models;
 using Jacko1394.Watcher.Google;
 using Jacko1394.Watcher.Interfaces;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Jacko1394.Watcher.Models;
+using Jacko1394.Rewinder.Shared.ViewModels;
 
 namespace Jacko1394.Rewinder.Shared {
 
@@ -28,17 +30,19 @@ namespace Jacko1394.Rewinder.Shared {
 
 					var config = context.Configuration;
 
-					// IOptions<WatcherSettings> settings,
-
-					var test = config.GetSection(nameof(WatcherSettings));
+					var watcher = config.GetSection(nameof(WatcherSettings)).Get<WatcherSettings>();
+					services.AddOptions<WatcherSettings>().Configure(config => {
+						config.IncludeFiles = watcher.IncludeFiles;
+						config.ExcludeDirectories = watcher.ExcludeDirectories;
+					});
 
 					services.AddTransient<MainPage>();
+					services.AddTransient<MainViewModel>();
 					services.AddTransient<IDbProvider, DbProvider>();
+					services.AddTransient<ICodeWatcher, CodeWatcher>();
 					services.AddTransient<IDiffMatchPatch, DiffMatchPatch>();
 
-					services.AddSingleton<ICodeWatcher, CodeWatcher>();
 					services.AddSingleton<App>();
-
 				})
 
 				.ConfigureLogging(logger => {

@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" />
     <PackageReference Include="Magiq.Mobile.Hosting" />
+    <PackageReference Include="Refractored.MvvmHelpers" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,5 +18,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

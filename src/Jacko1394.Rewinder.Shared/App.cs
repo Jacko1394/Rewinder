@@ -8,7 +8,7 @@ namespace Jacko1394.Rewinder.Shared {
         private readonly ILogger _logger;
 
         public App(MainPage main, ILogger<App> logger) {
-            MainPage = main;
+            MainPage = new NavigationPage(main);
             _logger = logger;
         }
 

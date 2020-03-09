@@ -1,18 +1,17 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Jacko1394.Rewinder.Shared.ViewModels;
 
 [assembly:XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Jacko1394.Rewinder.Shared {
 
     public partial class MainPage : ContentPage {
 
-        public MainPage() {
+        public MainPage(MainViewModel viewModel) {
             InitializeComponent();
+            BindingContext = viewModel;
         }
 
-        private void GotoCalculatorClicked(object sender, EventArgs e) {
-            //await DisplayAlert("Jack Della", "Test", "OK");
-        }
     }
 }
