@@ -9,7 +9,7 @@ namespace Jacko1394.Rewinder.MacOS
 {
     public partial class Container : NSViewController
 	{
-        NSViewController? _contentView;
+		private NSViewController? _contentView;
         private readonly NavigationPage? CurrentNavigationPage = Application.Current.MainPage as NavigationPage;
 
         public Container (IntPtr handle) : base (handle)
@@ -33,7 +33,7 @@ namespace Jacko1394.Rewinder.MacOS
             Content.AddSubview(_contentView.View);
             _contentView.View.Frame = Content.Frame;
 
-            if(CurrentNavigationPage is { } page)
+            if (CurrentNavigationPage is { } page)
             {
                 page.Pushed += Container_Pushed;
                 page.Popped += Container_Pushed;

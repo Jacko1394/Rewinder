@@ -1,31 +1,30 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.Extensions.Logging;
 using Xamarin.Forms;
 
-namespace Jacko1394.Rewinder.Shared
-{
-    public class App : Application
-    {
-        public App()
-        {
-            MainPage = new NavigationPage(new MainPage());
+namespace Jacko1394.Rewinder.Shared {
+
+    public class App : Application {
+
+        private readonly ILogger _logger;
+
+        public App(MainPage main, ILogger<App> logger) {
+            MainPage = main;
+            _logger = logger;
         }
 
-        protected override void OnStart()
-        {
+        protected override void OnStart() {
             base.OnStart();
-            Debug.WriteLine("Application started");
+            _logger.LogInformation("Application started");
         }
 
-        protected override void OnSleep()
-        {
+        protected override void OnSleep() {
             base.OnSleep();
-            Debug.WriteLine("Application sleeps");
+            _logger.LogInformation("Application sleeps");
         }
 
-        protected override void OnResume()
-        {
+        protected override void OnResume() {
             base.OnResume();
-            Debug.WriteLine("Application resumes");
+            _logger.LogInformation("Application resumes");
         }
     }
 }

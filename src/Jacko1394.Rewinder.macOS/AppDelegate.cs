@@ -4,6 +4,7 @@ using Jacko1394.Rewinder.Shared;
 using Foundation;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Jacko1394.Rewinder.MacOS
 {
@@ -15,9 +16,17 @@ namespace Jacko1394.Rewinder.MacOS
         private NSMenu? _menu;
 
         public AppDelegate() {
+
             Forms.Init();
             CreateStatusItem();
-            Application.SetCurrentApplication(new App());
+
+			var builder = Startup.Init();
+			var host = builder.Build();
+
+            // await host.RunAsync(); ?
+
+            var app = host.Services.GetRequiredService<App>();
+			Application.SetCurrentApplication(app);
         }
 
         private void CreateStatusItem()

@@ -4,37 +4,41 @@
 // Copyright © 2020 MAGIQ Software Ltd. All rights reserved.
 
 using Magiq.Mobile.Hosting;
+using Jacko1394.Watcher;
+using Jacko1394.Watcher.Google;
+using Jacko1394.Watcher.Interfaces;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Jacko1394.Watcher.Models;
 
 namespace Jacko1394.Rewinder.Shared {
 
 	public static class Startup {
 
-		//internal static async Task Main() {
-		//	var builder = Init(args);
-		//	var host = builder.Build();
-		//	await host.RunAsync();
-		//}
-
 		public static IHostBuilder Init() {
 
-			return Host.CreateDefaultBuilder()
+			return new HostBuilder()
 
 				.ConfigureHostConfiguration(config => {
 					config.AddJsonFromAssembly(typeof(Startup).Assembly);
 				})
 
 				.ConfigureServices((context, services) => {
+
 					var config = context.Configuration;
 
-					// ICodeWatcher
 					// IOptions<WatcherSettings> settings,
-					// IDbProvider db,
-					// IDiffMatchPatch differ
 
-					// services.AddHostedService<App>();
+					var test = config.GetSection(nameof(WatcherSettings));
+
+					services.AddTransient<MainPage>();
+					services.AddTransient<IDbProvider, DbProvider>();
+					services.AddTransient<IDiffMatchPatch, DiffMatchPatch>();
+
+					services.AddSingleton<ICodeWatcher, CodeWatcher>();
+					services.AddSingleton<App>();
+
 				})
 
 				.ConfigureLogging(logger => {

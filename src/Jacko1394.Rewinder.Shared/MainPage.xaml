@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             Title="Main page!"
+             mc:Ignorable="d" HeightRequest="50"
+             Title="Rewinder"
              x:Class="Jacko1394.Rewinder.Shared.MainPage">
 
-    <StackLayout Margin="20">
-        <Label Text="Hello Xamarin.Forms!" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
-        <Button Clicked="GotoCalculatorClicked" Text="Goto calculator" VerticalOptions="End" HorizontalOptions="Fill" />
+    <StackLayout Margin="20" VerticalOptions="Center">
+        <Label Text="Jack Della!" VerticalOptions="Center" HorizontalOptions="Center" />
+        <Button Clicked="GotoCalculatorClicked" Text="Click Here" VerticalOptions="Center" BackgroundColor="LightSkyBlue" />
     </StackLayout>
 
 </ContentPage>
