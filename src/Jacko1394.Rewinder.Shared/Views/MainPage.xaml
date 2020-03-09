@@ -27,6 +27,7 @@
 						TextColor="White"
 						FontFamily="Helvetica Neue"
 						BackgroundColor="DeepSkyBlue"
+						Command="{Binding AddCommand}"
 						HorizontalOptions="Center"/>
 			</StackLayout>
 

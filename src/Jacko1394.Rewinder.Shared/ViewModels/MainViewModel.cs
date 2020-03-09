@@ -8,6 +8,8 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Jacko1394.Watcher.Interfaces;
 using Jacko1394.Zsh;
+using MvvmHelpers.Interfaces;
+using System.Threading.Tasks;
 
 namespace Jacko1394.Rewinder.Shared.ViewModels {
 
@@ -38,6 +40,8 @@ namespace Jacko1394.Rewinder.Shared.ViewModels {
 
 		public ObservableRangeCollection<Item> List { get; } = new ObservableRangeCollection<Item>();
 
+		public IAsyncCommand AddCommand { get; }
+
 		private readonly ICodeWatcher _watcher;
 		private readonly IZsh _zsh;
 
@@ -50,10 +54,18 @@ namespace Jacko1394.Rewinder.Shared.ViewModels {
 
 		}
 
+		private async Task Add() {
+
+			var str = await _zsh.CheckOutputAsync("ls");
+
+		}
+
 		public MainViewModel(ICodeWatcher code, IZsh zsh) {
 
 			_zsh = zsh;
 			_watcher = code;
+
+			AddCommand = new AsyncCommand(Add);
 
 			code.OnAddDirectory += Code_OnAddDirectory;
 
