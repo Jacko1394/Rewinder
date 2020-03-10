@@ -6,19 +6,21 @@
 
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" />
-    <PackageReference Include="Magiq.Mobile.Hosting" />
     <PackageReference Include="Refractored.MvvmHelpers" />
+    
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+    <PackageReference Include="Magiq.Mobile.Hosting" />
+    <PackageReference Include="Magiq.Mobile.Extensions" />
     <PackageReference Include="Jacko1394.Zsh" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Jacko1394.Watcher\Jacko1394.Watcher.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="osx.10.13-x64.zip" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="appsettings.json" />
+    <EmbeddedResource Include="osx.10.13-x64.zip" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />

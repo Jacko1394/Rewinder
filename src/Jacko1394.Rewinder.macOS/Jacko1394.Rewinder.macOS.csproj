@@ -216,13 +216,13 @@
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\TrayIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Jacko1394.Rewinder.Shared\Jacko1394.Rewinder.Shared.csproj">
       <Project>{C31F0FD6-2C98-4F09-AEC9-006EE776F49E}</Project>
       <Name>Jacko1394.Rewinder.Shared</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\TrayIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.4.6.0.379-pre1\build\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.4.6.0.379-pre1\build\Xamarin.Forms.targets')" />

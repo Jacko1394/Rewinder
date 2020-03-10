@@ -77,8 +77,9 @@ namespace Jacko1394.Watcher {
 		private void DiffUpdate(object sender, FileSystemEventArgs e) {
 
 			var path = e.FullPath;
+			var type = Path.GetExtension(path);
 
-			if (!IncludeFilters.Contains(path)) {
+			if (!IncludeFilters.Contains('*' + type)) {
 				//foreach (var item in IncludeFilters) {
 				//	watcher.Filters.Add(item);
 				//}

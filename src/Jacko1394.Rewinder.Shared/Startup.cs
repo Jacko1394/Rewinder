@@ -3,24 +3,59 @@
 // Created by Jack Della on 8/03/2020
 // Copyright © 2020 MAGIQ Software Ltd. All rights reserved.
 
+using System.Linq;
+using System.IO.Compression;
 using Magiq.Mobile.Hosting;
-using Jacko1394.Watcher;
-using Jacko1394.Watcher.Models;
-using Jacko1394.Watcher.Google;
-using Jacko1394.Watcher.Interfaces;
+using Magiq.Mobile.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Jacko1394.Rewinder.Shared.Views;
 using Jacko1394.Rewinder.Shared.ViewModels;
 using Jacko1394.Zsh;
+using System.Diagnostics;
+using System;
 
 namespace Jacko1394.Rewinder.Shared {
 
 	public static class Startup {
 
+		private static Process ShellProcess(string path) => new Process {
+
+			EnableRaisingEvents = true,
+
+			StartInfo = new ProcessStartInfo {
+
+				// shell
+				FileName = path,
+				UseShellExecute = false,
+				CreateNoWindow = true,
+
+				// intercept
+				RedirectStandardInput = true,
+				RedirectStandardOutput = true,
+				RedirectStandardError = true
+			}
+		};
+
+		private static void LogOutput(object sender, DataReceivedEventArgs e) => Console.WriteLine(e.Data);
+
 		public static IHostBuilder Init() {
+
+			using var data = GeneralExtensions.GetStream("osx");
+			using var zip = new ZipArchive(data);
+			var test = zip.Entries.Select(x => x.FullName).ToJson();
+
+			using var proc = ShellProcess("path");
+
+			if (proc.Start()) {
+				proc.OutputDataReceived += LogOutput;
+				proc.ErrorDataReceived += LogOutput;
+			}
+
+			proc.WaitForExit(10_000);
+			// var run = new Process();
+			// run.
 
 			return new HostBuilder()
 
@@ -32,22 +67,12 @@ namespace Jacko1394.Rewinder.Shared {
 
 					var config = context.Configuration;
 
-					var watcher = config.GetSection(nameof(WatcherSettings)).Get<WatcherSettings>();
-					services.AddOptions<WatcherSettings>().Configure(config => {
-						config.IncludeFiles = watcher.IncludeFiles;
-						config.ExcludeDirectories = watcher.ExcludeDirectories;
-					});
-
 					services.AddTransient<MainPage>();
 					services.AddTransient<DirectoryPage>();
 
 					services.AddTransient<MainViewModel>();
 
 					services.AddTransient<IZsh, Zsh.Zsh>();
-					services.AddTransient<IDbProvider, DbProvider>();
-					services.AddTransient<ICodeWatcher, CodeWatcher>();
-					services.AddTransient<IDiffMatchPatch, DiffMatchPatch>();
-
 					services.AddSingleton<App>();
 				})
 

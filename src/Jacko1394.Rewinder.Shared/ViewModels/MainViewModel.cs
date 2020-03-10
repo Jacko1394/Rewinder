@@ -6,7 +6,7 @@
 using System.Windows.Input;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
-using Jacko1394.Watcher.Interfaces;
+//using Jacko1394.Watcher.Interfaces;
 using Jacko1394.Zsh;
 using MvvmHelpers.Interfaces;
 using System.Threading.Tasks;
@@ -42,7 +42,7 @@ namespace Jacko1394.Rewinder.Shared.ViewModels {
 
 		public IAsyncCommand AddCommand { get; }
 
-		private readonly ICodeWatcher _watcher;
+		//private readonly ICodeWatcher _watcher;
 		private readonly IZsh _zsh;
 
 		private void Select(Item item) {
@@ -60,16 +60,14 @@ namespace Jacko1394.Rewinder.Shared.ViewModels {
 
 		}
 
-		public MainViewModel(ICodeWatcher code, IZsh zsh) {
+		public MainViewModel(IZsh zsh) {
 
 			_zsh = zsh;
-			_watcher = code;
 
 			AddCommand = new AsyncCommand(Add);
 
-			code.OnAddDirectory += Code_OnAddDirectory;
-
-			// code.Add("/Users/jd/GIT/Rewinder");
+			//code.OnAddDirectory += Code_OnAddDirectory;
+			//code.Add("/Users/jd/GIT/Rewinder");
 
 			zsh.Dir = "/Users/jd";
 
