@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 using Microsoft.Extensions.DependencyInjection;
 using Jacko1394.Rewinder.Shared;
+using Jacko1394.Zsh;
 
 namespace Jacko1394.Rewinder.MacOS
 {
@@ -16,6 +17,8 @@ namespace Jacko1394.Rewinder.MacOS
         private NSStatusItem? _statusBarItem;
         private NSMenu? _menu;
 
+        private readonly IZsh _zsh;
+
         public AppDelegate() {
 
             Forms.Init();
@@ -23,6 +26,8 @@ namespace Jacko1394.Rewinder.MacOS
 
 			var builder = Startup.Init();
 			var host = builder.Build();
+
+            _zsh = host.Services.GetRequiredService<IZsh>();
 
 			// await host.RunAsync();
 
@@ -62,9 +67,11 @@ namespace Jacko1394.Rewinder.MacOS
             }
         }
 
-        public override void DidFinishLaunching(NSNotification notification)
+        public override async void DidFinishLaunching(NSNotification notification)
         {
             // Insert code here to initialize your application
+            var str = await _zsh.CheckOutputAsync("ls");
+
         }
 
         public override void WillTerminate(NSNotification notification)

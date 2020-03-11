@@ -15,6 +15,7 @@ using Jacko1394.Rewinder.Shared.ViewModels;
 using Jacko1394.Zsh;
 using System.Diagnostics;
 using System;
+using System.IO;
 
 namespace Jacko1394.Rewinder.Shared {
 
@@ -28,32 +29,36 @@ namespace Jacko1394.Rewinder.Shared {
 
 				// shell
 				FileName = path,
-				UseShellExecute = false,
+				UseShellExecute = true,
 				CreateNoWindow = true,
 
 				// intercept
-				RedirectStandardInput = true,
-				RedirectStandardOutput = true,
-				RedirectStandardError = true
+				RedirectStandardInput = false,
+				RedirectStandardOutput = false,
+				RedirectStandardError = false
 			}
 		};
 
-		private static void LogOutput(object sender, DataReceivedEventArgs e) => Console.WriteLine(e.Data);
+		private static void LogOutput(object sender, DataReceivedEventArgs e) => Trace.WriteLine(e.Data);
 
 		public static IHostBuilder Init() {
 
-			using var data = GeneralExtensions.GetStream("osx");
-			using var zip = new ZipArchive(data);
-			var test = zip.Entries.Select(x => x.FullName).ToJson();
+			//using var data = GeneralExtensions.GetStream("osx");
+			//using var zip = new ZipArchive(data);
+			//var test = zip.Entries.Select(x => x.FullName).ToJson();
 
-			using var proc = ShellProcess("path");
+			//var path = Path.GetTempPath() + "";
+			//Directory.CreateDirectory(path);
+			//zip.ExtractToDirectory(path, true);
 
-			if (proc.Start()) {
-				proc.OutputDataReceived += LogOutput;
-				proc.ErrorDataReceived += LogOutput;
-			}
+			//using var proc = ShellProcess("/Users/jd/Downloads/osx-rewind/Jacko1394.Watcher");
 
-			proc.WaitForExit(10_000);
+			//if (proc.Start()) {
+			//	proc.OutputDataReceived += LogOutput;
+			//	proc.ErrorDataReceived += LogOutput;
+			//}
+
+			//proc.WaitForExit(10_000);
 			// var run = new Process();
 			// run.
 
