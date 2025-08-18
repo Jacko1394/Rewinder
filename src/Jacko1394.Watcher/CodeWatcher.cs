@@ -116,6 +116,7 @@ namespace Jacko1394.Watcher {
 
 			if (_diffs.FindById(path) is CodeWatcherEntity codeWatcherEntity) {
 				// do diff
+
 				var diffs = _differ.diff_main(codeWatcherEntity.Latest, current);
 				_differ.diff_cleanupSemantic(diffs);
 
